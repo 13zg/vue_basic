@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">
+      <h3>{{number.a}}</h3>
+      <button @click="number.a++">点击a+1</button>
+      <hr />
+      <h3>{{number.b}}</h3>
+      <button @click="number.b++">点击b+1</button>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          number: {
+            a: 1,
+            b: 2,
+          },
+        },
+        watch: {
+          //   默认不监测对象内部值的改变，只监视一层，对象地址不发生变化则是没有改变
+          number: {
+            //deep为true，进行深度监视
+            deep: true,
+            handler() {
+              console.log("number改变了");
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

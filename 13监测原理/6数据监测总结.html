@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title></title>
+    <script src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <button @click="stu.age++">年龄+1岁</button> <br />
+      <button @click="addSex">添加性别属性，默认值：男</button> <br />
+      <button @click="stu.sex = '未知' ">修改性别</button> <br />
+      <button @click="addFriend">在列表首位添加一个朋友</button> <br />
+      <button @click="updateFirstFriendName">
+        修改第一个朋友的名字为：张三
+      </button>
+      <br />
+      <button @click="addHobby">添加一个爱好</button> <br />
+      <button @click="updateHobby">修改第一个爱好为：开车</button> <br />
+      <button @click="removeSmoke">过滤掉爱好中的唱歌</button> <br />
+      <h2>姓名:{{stu.name}}</h2>
+      <h2>年龄:{{stu.age}}</h2>
+      <h2 v-if="stu.sex">性别:{{stu.sex}}</h2>
+      <h2>爱好</h2>
+      <ul>
+        <li v-for="h in stu.hobby">{{h}}</li>
+      </ul>
+      <hr />
+      <h2>朋友们</h2>
+      <ul>
+        <li v-for="(f,index) in stu.friends" :key="index">
+          {{f.name}}-{{f.age}}
+        </li>
+      </ul>
+    </div>
+    <script type="text/javascript">
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          stu: {
+            name: "tom",
+            age: 18,
+            hobby: ["唱歌", "跳舞", "看书"],
+            friends: [
+              { name: "andy", age: 18, sex: "male" },
+              { name: "bob", age: 10, sex: "male" },
+              { name: "cindy", age: 20, sex: "male" },
+            ],
+          },
+        },
+        methods: {
+          addSex() {
+            // Vue.set(this.stu, "sex", "男");
+            //相当于
+            this.$set(this.stu, "sex", "男");
+          },
+          addFriend() {
+            this.stu.friends.unshift({ name: "rosy", age: 19, sex: "male" });
+          },
+          updateFirstFriendName() {
+            this.stu.friends[0].name = "张三";
+          },
+          addHobby() {
+            this.stu.hobby.push("吃饭");
+          },
+          updateHobby() {
+            // this.stu.hobby.splice(0, 1, "开车");
+            //相当于
+            this.$set(this.stu.hobby, 0, "开车");
+          },
+          removeSmoke() {
+            const arr = this.stu.hobby.filter((p) => {
+              return p != "唱歌";
+            });
+            this.stu.hobby = arr;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/vue.js"></script>
+    <script src="dayjs.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">
+      <h4>{{time | getTime}}</h4>
+      <!-- 可以传递参数 -->
+      <h4>{{time | getTime('HH:mm:ss')}}</h4>
+      <!-- 可以多个过滤器串联 -->
+      <h4>{{time | getTime | mySlice}}</h4>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#root",
+      data: {
+        time: 1663042196127,
+      },
+      filters: {
+        getTime(val, str = "YYYY-MM-DD HH:mm:ss") {
+          return dayjs(val).format(str);
+        },
+        mySlice(val) {
+          return val.slice(0, 4);
+        },
+      },
+    });
+  </script>
+</html>

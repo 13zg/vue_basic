@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../../js/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    //定义hello组件
+    const hello = {
+      template: `<h3>{{msg}}</h3>`,
+      data() {
+        return {
+          msg: "你好，2022",
+        };
+      },
+    };
+    //定义student组件
+    const student = Vue.extend({
+      template: `
+        <div>
+            <h4>{{name}}</h4>
+            <h4>{{age}}</h4>
+        </div>`,
+      data() {
+        return {
+          name: "Yee",
+          age: 18,
+        };
+      },
+    });
+    //定义school组件
+    const school = Vue.extend({
+      template: `
+        <div>
+            <h4>{{name}}</h4>
+            <h4>{{adress}}</h4>
+            <hr/>
+            <hello></hello>
+            <student><student/>
+        </div>`,
+      data() {
+        return {
+          name: "CUIT",
+          adress: "航空港",
+        };
+      },
+      components: {
+        student,
+        hello,
+      },
+    });
+
+    //定义app组件
+    const app = {
+      template: `<h1><school></school></h1>`,
+      components: {
+        school,
+      },
+    };
+    // 定义vm
+    new Vue({
+      template: `<app></app>`,
+      el: "#root",
+      components: {
+        app,
+      },
+    });
+  </script>
+</html>

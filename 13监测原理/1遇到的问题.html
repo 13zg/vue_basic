@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">
+      <h2>人员列表</h2>
+      <button @click="updataA">点击更新马冬梅信息</button>
+      <ul>
+        <!-- 遍历数组 -->
+        <li v-for="(item,index) in persons" :key="persons.id">
+          {{item.name}}-{{item.age}}
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    const vm = new Vue({
+      el: "#root",
+      data: {
+        persons: [
+          { id: 001, name: "马冬梅", age: 18 },
+          { id: 002, name: "周冬雨", age: 20 },
+          { id: 003, name: "周杰伦", age: 19 },
+          { id: 004, name: "温兆伦", age: 21 },
+        ],
+      },
+      methods: {
+        updataA() {
+          //依次修改Vue能够监测到
+          /*  this.persons[0].name = "Yee";
+          this.persons[0].age = "23"; */
+          //直接修改Vue无法监测
+          this.persons[0] = { id: 001, name: "Yee", age: 23 };
+        },
+      },
+    });
+  </script>
+</html>

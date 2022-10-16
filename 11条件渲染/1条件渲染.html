@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">
+      <!-- 1，使用v-show -->
+      <div v-show="true">{{name}}</div>
+      <div v-show="1===1">{{name}}</div>
+      <!-- 2，使用v-if -->
+      <div v-if="true">{{name}}</div>
+      <!-- v-if加v-else-if -->
+      <button @click="n++">点击n+1</button>
+      <div>{{n}}</div>
+      <div v-if="n===1">显示第一个</div>
+      <div v-else-if="n===2">显示第二个</div>
+      <div v-else>显示其余的</div>
+    </div>
+    <script>
+      new Vue({
+        el: "#root",
+        data: {
+          name: "zt",
+          n: 0,
+        },
+      });
+    </script>
+  </body>
+</html>

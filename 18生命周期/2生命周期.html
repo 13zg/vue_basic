@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">
+      <h3 :style="{opacity}">你好，Yee</h3>
+      <button @click="stop">点击停止渐变</button>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#root",
+      data: {
+        opacity: 1,
+      },
+      methods: {
+        //不在这里清除定时器：以后的销毁不会这样手动销毁，根本不会有stop函数
+        stop() {
+          this.$destroy();
+        },
+      },
+      //   挂载完毕：表示在初始化插入页面元素后执行该函数
+      mounted() {
+        this.timer = setInterval(() => {
+          this.opacity -= 0.01;
+          if (this.opacity <= 0) this.opacity = 1;
+        }, 16);
+      },
+      //在销毁前停止定时器
+      beforeDestroy() {
+        clearInterval(this.timer);
+      },
+    });
+  </script>
+</html>

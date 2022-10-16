@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+    <style>
+      /* 属性选择器选择所有包含v-cloak的标签 */
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <h4 v-cloak>{{name}}</h4>
+    </div>
+    <!-- 若引入文件放到模板之下，在未加载出来时，模板会隐藏 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+  </body>
+  <script>
+    new Vue({
+      el: "#root",
+      data: {
+        name: "你好，Yee",
+      },
+    });
+  </script>
+</html>
